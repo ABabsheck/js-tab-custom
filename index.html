@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>custom tab</title>
+    <style>
+        .tab-nav {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            list-style: none;
+        }
+        
+        .tab-btn {
+            cursor: pointer;
+            padding: 0 15px;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.tab-btn-active {
+            background: #0279bb;
+            color: #fff;
+        }
+        
+        .tab-data {
+            display: none;
+        }
+        
+        .tab-data.tab-data-active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-tab">
+        <ul class="tab-nav">
+            <li class="tab-btn tab-btn-active" data-count="0">tab 1</li>
+            <li class="tab-btn" data-count="1">tab 2</li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-data tab-data-active">tab data 1</div>
+            <div class="tab-data">tab data 2</div>
+        </div>
+    </div>
+</body>
+<script>
+    function customTab() {
+        if (document.getElementsByClassName('slider-tab')[0]) {
+            let tabBtn = document.getElementsByClassName('tab-btn'),
+                tabD = document.getElementsByClassName('tab-data'),
+                tabLength = tabBtn.length;
+
+
+            function showTab() {
+                let btnActive = document.getElementsByClassName('tab-btn-active')[0],
+                    dataActive = document.getElementsByClassName('tab-data-active')[0],
+                    tabCount = this.getAttribute('data-count');
+
+                btnActive.classList.remove('tab-btn-active');
+                this.classList.add('tab-btn-active');
+
+                dataActive.classList.remove('tab-data-active');
+                tabD[tabCount].classList.add('tab-data-active');
+            }
+            for (i = 0; i < tabLength; i++) {
+                tabBtn[i].addEventListener('click', showTab)
+            }
+        };
+    }
+    customTab();
+</script>
+
+</html>
